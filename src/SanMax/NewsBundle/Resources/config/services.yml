@@ -1,0 +1,7 @@
+services:
+    san_max_news.article_listener:
+        class: SanMax\NewsBundle\Listener\ArticleListener
+        tags:
+          - { name: doctrine.event_listener, event: prePersist }
+        arguments:
+          - "@security.token_storage"
