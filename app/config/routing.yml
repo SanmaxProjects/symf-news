@@ -1,3 +1,7 @@
+san_max_news:
+    resource: "@SanMaxNewsBundle/Resources/config/routing.yml"
+    prefix:   /news
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
