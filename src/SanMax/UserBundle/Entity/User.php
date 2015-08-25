@@ -1,17 +1,16 @@
 <?php
-
-namespace SanMax\NewsBundle\Entity;
+namespace SanMax\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity()
  */
-class Author
+class User extends BaseUser
 {
 
     /**
@@ -24,31 +23,23 @@ class Author
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     * @Gedmo\Translatable
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     * @Gedmo\Translatable
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $lastName;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @Gedmo\Slug(fields={"firstName", "lastName"})
-     * @ORM\Column(length=255, unique=true)
-     * @Assert\NotNull()
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $slug;
-
-
+    protected $dateOfBirth;
 
     /**
      * @var \DateTime $created
@@ -67,11 +58,17 @@ class Author
     protected $updated;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="SanMax\NewsBundle\Entity\Article", mappedBy="author")
+     */
+    protected $articles;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        parent::__construct();
     }
 
     /**
@@ -88,6 +85,22 @@ class Author
     public function setCreated($created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateOfBirth()
+    {
+        return $this->dateOfBirth;
+    }
+
+    /**
+     * @param \DateTime $dateOfBirth
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
     }
 
     /**
@@ -139,22 +152,6 @@ class Author
     }
 
     /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getUpdated()
@@ -171,7 +168,7 @@ class Author
     }
 
     /**
-     * @return ArrayCollection|Article[]
+     * @return ArrayCollection
      */
     public function getArticles()
     {
@@ -179,7 +176,7 @@ class Author
     }
 
     /**
-     * @param ArrayCollection|Article[] $articles
+     * @param ArrayCollection $articles
      */
     public function setArticles($articles)
     {
@@ -191,6 +188,6 @@ class Author
      */
     public function __toString()
     {
-        return $this->firstName . ' ('.$this->lastName.')';
+        return $this->firstName . ' ' . $this->getCreated()->format('d-m-Y).');
     }
 }

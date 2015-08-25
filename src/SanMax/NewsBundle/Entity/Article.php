@@ -62,7 +62,7 @@ class Article
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="SanMax\NewsBundle\Entity\Author", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="SanMax\UserBundle\Entity\User", inversedBy="articles")
      */
     protected $author;
 

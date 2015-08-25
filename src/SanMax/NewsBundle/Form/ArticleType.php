@@ -15,10 +15,12 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('author')
             ->add('title')
             ->add('content')
             ->add('keywords')
+            ->add('description', 'textarea', [
+                    'label' => 'Duidelijke omschrijving'
+                ])
             ->add('save', 'submit')
         ;
     }

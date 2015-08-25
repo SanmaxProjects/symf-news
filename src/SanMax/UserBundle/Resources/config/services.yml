@@ -1,4 +1,4 @@
 services:
-#    san_max_news.example:
-#        class: SanMax\NewsBundle\Example
+#    san_max_user.example:
+#        class: SanMax\UserBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]

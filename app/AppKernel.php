@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new SanMax\NewsBundle\SanMaxNewsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new SanMax\UserBundle\SanMaxUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

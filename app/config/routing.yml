@@ -1,3 +1,10 @@
+san_max_user:
+    resource: "@SanMaxUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 san_max_news:
     resource: "@SanMaxNewsBundle/Resources/config/routing.yml"
     prefix:   /news
